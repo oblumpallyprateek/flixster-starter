@@ -1,28 +1,405 @@
 .App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.header p {
+  margin: 0.5rem 0 0;
+  opacity: 0.9;
+}
+
+/* Search Bar */
+.search-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.search-form {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 250px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.search-button {
+  padding: 0.75rem 1.5rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-button:hover {
+  background: #5568d3;
+}
+
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sort-select {
+  padding: 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Movie List */
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  flex: 1;
+}
+
+.loading,
+.no-movies {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+}
+
+/* Movie Card */
+.movie-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.movie-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.movie-poster {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.movie-info {
+  padding: 1rem;
+}
+
+.movie-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  min-height: 2.6rem;
+}
+
+.movie-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movie-rating {
+  font-weight: bold;
+  color: #667eea;
+}
+
+.like-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.like-button:hover {
+  transform: scale(1.2);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1;
+  transition: background 0.2s;
+}
+
+.modal-close:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-header {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.modal-poster {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.modal-info h2 {
+  margin: 0 0 1rem;
+  font-size: 2rem;
+}
+
+.modal-info p {
+  margin: 0.5rem 0;
+}
+
+.modal-body {
+  padding: 2rem;
+}
+
+.modal-body h3 {
+  margin: 0 0 1rem;
+  color: #667eea;
+}
+
+.modal-loading {
+  padding: 3rem;
   text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
+/* Footer */
+.footer {
+  background: #2d3748;
   color: white;
-  padding: 20px;
+  padding: 2rem;
+  text-align: center;
+  margin-top: auto;
 }
 
+.footer p {
+  margin: 0.5rem 0;
+}
+
+.footer a {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - MILESTONE 3
+   ======================================== */
+
+/*
+ * Breakpoint Strategy:
+ * - Mobile (< 600px): 1 card per row, stacked layout
+ * - Tablet (600px - 1024px): 2-3 cards per row
+ * - Desktop (> 1024px): 4-6 cards per row (auto-fill)
+ */
+
+/* Mobile: < 600px */
 @media (max-width: 600px) {
-  .movie-card {
-    width: 100%;
+  /* Header adjustments */
+  .header h1 {
+    font-size: 2rem;
   }
 
+  .header p {
+    font-size: 0.9rem;
+  }
+
+  /* Search bar: stack vertically */
   .search-bar {
     flex-direction: column;
-    gap: 10px;
+    align-items: stretch;
+    padding: 1rem;
   }
 
-  .search-bar form {
+  .search-form {
+    min-width: 100%;
+  }
+
+  .sort-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .sort-select {
+    flex: 1;
+  }
+
+  /* Movie grid: single column */
+  .movie-list {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  /* Movie card: maintain legibility */
+  .movie-card {
+    max-width: 100%;
+  }
+
+  .movie-poster {
+    height: 400px;
+  }
+
+  .movie-title {
+    font-size: 1.2rem;
+    min-height: auto;
+  }
+
+  /* Modal: full-width adjustments */
+  .modal-overlay {
+    padding: 0.5rem;
+  }
+
+  .modal-header {
     flex-direction: column;
+    padding: 1.5rem;
+  }
+
+  .modal-poster {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+  }
+
+  .modal-info h2 {
+    font-size: 1.5rem;
+  }
+
+  .modal-body {
+    padding: 1.5rem;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 1.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet: 600px - 1024px */
+@media (min-width: 600px) and (max-width: 1024px) {
+  /* Header */
+  .header h1 {
+    font-size: 2.2rem;
+  }
+
+  /* Movie grid: 2-3 columns */
+  .movie-list {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  /* Modal: slightly smaller */
+  .modal-content {
+    max-width: 600px;
+  }
+
+  .modal-poster {
+    width: 180px;
+    height: 270px;
+  }
+
+  .modal-info h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Desktop: > 1024px */
+@media (min-width: 1024px) {
+  /* Movie grid: 4-6 columns with auto-fill */
+  .movie-list {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Center content on very wide screens */
+  .search-bar {
+    max-width: 1400px;
+    margin: 0 auto;
   }
 }
