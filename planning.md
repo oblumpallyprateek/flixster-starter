@@ -216,44 +216,64 @@ App
 
 ### Feature: Personalized Watch Recommendation
 
-#### Implementation Plan
-- **Location**: MovieModal component
-- **Trigger**: When modal opens with movie details loaded
-- **Input Context** (data sent to AI):
-  - Movie `title` (string)
-  - Movie `genres` (array of genre names)
-  - Movie `overview` (string)
-  - Movie `vote_average` (number)
-- **Prompt Template**:
-  ```
-  Based on this movie: "${title}" (Genres: ${genres.join(', ')})
-  Overview: ${overview}
-  Rating: ${vote_average}/10
-  
-  Generate a 2-3 sentence personalized watch recommendation.
-  Consider the movie's themes, tone, and target audience.
-  ```
-- **Expected Output**: 
-  - 2-3 sentence recommendation string
-  - Example: "Perfect for fans of character-driven dramas with emotional depth. The strong performances and tight pacing make this an engaging watch for a quiet evening. Recommended if you enjoyed similar introspective films."
-- **State Management**:
-  - `aiInsight` (string | null) in MovieModal component
-  - Initially `null`, set after AI API call completes
-- **UI Display**:
-  - Section in modal below movie overview
-  - Header: "🤖 AI Recommendation"
-  - Loading state: "Generating recommendation..."
-  - Error state: Don't show section if AI call fails (graceful degradation)
-- **API Integration**:
-  - Use Claude API (via Anthropic SDK) or alternative AI service
-  - Call made in `useEffect` after `movieDetails` loaded
-  - Store API key in `.env` as `VITE_AI_API_KEY`
-  - Timeout after 5 seconds to prevent hanging
+#### Finalized Prompt Spec
 
-#### Refinement Notes
-- Consider caching AI responses by movie ID to avoid redundant API calls
-- May add user preference inputs later (e.g., mood, watch time available)
-- Could expand to suggest similar movies in future iteration
+**Role**: An enthusiastic but honest film critic who gives practical watch recommendations
+
+**Task**: Write a 2-3 sentence watch recommendation that helps users decide if this movie is worth their evening
+
+**Inputs**:
+- Movie `title` (string)
+- Movie `genres` (comma-separated string from genre names)
+- Movie `overview` (string)
+- Movie `vote_average` (number)
+
+**Output Format**: 
+- Plain text, 2-3 sentences
+- No spoilers beyond what's in the overview
+- No "I think" or "I recommend" statements (write as if it's a fact)
+- No generic phrases like "this film is a must-see"
+
+**Constraints**:
+- Focus on who would enjoy this movie and why
+- Mention the tone, pacing, or standout elements when relevant
+- Keep it conversational and honest
+
+**Failure Behavior**: 
+If the AI call fails, display: "We couldn't generate a recommendation for this one — check out the overview above!"
+
+#### OpenRouter Configuration
+- **Endpoint**: `https://openrouter.ai/api/v1/chat/completions`
+- **Model**: `meta-llama/llama-3.3-70b-instruct:free` (free tier)
+- **API Key**: Stored in `.env` as `VITE_OPENROUTER_API_KEY`
+
+#### State Variables
+- `aiInsight` (string | null): Holds the AI-generated recommendation text
+- `loadingInsight` (boolean): Loading state while AI call is in progress
+- Both in MovieModal component, initialized to `null` and `false`
+
+#### Trigger
+When the modal opens and movie details have been successfully fetched (in a `useEffect` that watches `movieDetails`)
+
+#### UI Display
+- Section in modal below movie overview
+- Header: "🤖 AI Recommendation"
+- Loading state: "✨ Getting a recommendation..."
+- Success state: Display the AI-generated text
+- Error/No Key state: Section doesn't render (graceful degradation)
+
+#### Implementation Notes
+- Reset `aiInsight` and `loadingInsight` when modal closes
+- Only call AI once per modal open (don't re-fetch if already loaded)
+- Handle missing API key gracefully (check if key exists before calling)
+
+### AI Feature — Decisions Log
+*To be filled during implementation*
+
+- **What the API returned initially:** 
+- **What I changed in my prompt:** 
+- **What fallback behavior I implemented:** 
+- **What I learned:**
 
 ---
 
