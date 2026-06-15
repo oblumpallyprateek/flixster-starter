@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const SearchBar = ({ onSearch, sortBy, onSortChange }) => {
+const SearchBar = ({ onSearch, sortBy, onSortChange, onNowPlaying, viewMode }) => {
   const [inputValue, setInputValue] = useState('');
 
   const handleSubmit = (e) => {
@@ -8,6 +8,11 @@ const SearchBar = ({ onSearch, sortBy, onSortChange }) => {
     if (inputValue.trim()) {
       onSearch(inputValue.trim());
     }
+  };
+
+  const handleNowPlaying = () => {
+    setInputValue('');
+    onNowPlaying();
   };
 
   return (
@@ -24,6 +29,11 @@ const SearchBar = ({ onSearch, sortBy, onSortChange }) => {
         <button type="submit" className="search-button">
           Search
         </button>
+        {viewMode === 'search' && (
+          <button type="button" className="now-playing-button" onClick={handleNowPlaying}>
+            Now Playing
+          </button>
+        )}
       </form>
 
       <div className="sort-controls">

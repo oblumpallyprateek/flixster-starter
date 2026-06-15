@@ -12,18 +12,22 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [sortBy, setSortBy] = useState('rating');
   const [viewMode, setViewMode] = useState('now-playing');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchNowPlayingMovies();
   }, []);
 
-  const fetchNowPlayingMovies = async () => {
+  const fetchNowPlayingMovies = async (page = 1) => {
     setIsLoading(true);
     setViewMode('now-playing');
+    setSearchQuery('');
 
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_API_KEY}&page=1`
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_API_KEY}&page=${page}`
       );
 
       if (!response.ok) {
@@ -32,7 +36,15 @@ const App = () => {
 
       const data = await response.json();
       const filteredMovies = data.results.filter(movie => movie.poster_path !== null);
-      setMovies(filteredMovies);
+
+      if (page === 1) {
+        setMovies(filteredMovies);
+      } else {
+        setMovies(prevMovies => [...prevMovies, ...filteredMovies]);
+      }
+
+      setCurrentPage(data.page);
+      setTotalPages(data.total_pages);
     } catch (err) {
       console.error('Error fetching movies:', err);
     } finally {
@@ -40,7 +52,7 @@ const App = () => {
     }
   };
 
-  const handleSearch = async (query) => {
+  const handleSearch = async (query, page = 1) => {
     if (!query.trim()) {
       return;
     }
@@ -48,9 +60,13 @@ const App = () => {
     setIsLoading(true);
     setViewMode('search');
 
+    if (page === 1) {
+      setSearchQuery(query);
+    }
+
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.VITE_API_KEY}&query=${encodeURIComponent(query)}&page=1`
+        `https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.VITE_API_KEY}&query=${encodeURIComponent(query)}&page=${page}`
       );
 
       if (!response.ok) {
@@ -59,7 +75,15 @@ const App = () => {
 
       const data = await response.json();
       const filteredMovies = data.results.filter(movie => movie.poster_path !== null);
-      setMovies(filteredMovies);
+
+      if (page === 1) {
+        setMovies(filteredMovies);
+      } else {
+        setMovies(prevMovies => [...prevMovies, ...filteredMovies]);
+      }
+
+      setCurrentPage(data.page);
+      setTotalPages(data.total_pages);
     } catch (err) {
       console.error('Error searching movies:', err);
     } finally {
@@ -88,6 +112,17 @@ const App = () => {
     setSelectedMovie(null);
   };
 
+  const handleLoadMore = () => {
+    const nextPage = currentPage + 1;
+    if (viewMode === 'search') {
+      handleSearch(searchQuery, nextPage);
+    } else {
+      fetchNowPlayingMovies(nextPage);
+    }
+  };
+
+  const showLoadMore = currentPage < totalPages && !isLoading;
+
   return (
     <div className="App">
       <Header />
@@ -95,12 +130,21 @@ const App = () => {
         onSearch={handleSearch}
         sortBy={sortBy}
         onSortChange={handleSortChange}
+        onNowPlaying={fetchNowPlayingMovies}
+        viewMode={viewMode}
       />
       <MovieList
         movies={movies}
         onMovieClick={handleMovieClick}
         isLoading={isLoading}
       />
+      {showLoadMore && (
+        <div className="load-more-container">
+          <button className="load-more-button" onClick={handleLoadMore}>
+            Load More
+          </button>
+        </div>
+      )}
       <MovieModal
         movie={selectedMovie}
         onClose={handleCloseModal}
