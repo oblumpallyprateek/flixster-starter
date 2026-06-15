@@ -268,12 +268,21 @@ When the modal opens and movie details have been successfully fetched (in a `use
 - Handle missing API key gracefully (check if key exists before calling)
 
 ### AI Feature — Decisions Log
-*To be filled during implementation*
 
-- **What the API returned initially:** 
-- **What I changed in my prompt:** 
+- **What the API returned initially:** The first model (`meta-llama/llama-3.3-70b-instruct:free`) was rate-limited (429 error). Switched to `openrouter/free` which automatically routes to an available free model and successfully returned recommendations.
+
+- **What I changed in my prompt:** The system prompt emphasizes being "enthusiastic but honest" and avoids generic phrases. Instructs the AI to write as fact (no "I think") and focus on who would enjoy the movie. This produces more actionable recommendations than a generic "this movie is good" response.
+
 - **What fallback behavior I implemented:** 
-- **What I learned:**
+  - If no API key exists, the section doesn't render at all (graceful degradation)
+  - If the API call fails, shows: "We couldn't generate a recommendation for this one — check out the overview above!"
+  - Loading state shows "✨ Getting a recommendation..." with a pulsing animation
+
+- **What I learned:** 
+  - Free tier models can be rate-limited; using `openrouter/free` auto-routing is more reliable
+  - Specific prompt constraints (no "I" statements, focus on audience) produce better recommendations than generic prompts
+  - State cleanup on modal close is important - prevents stale recommendations from showing on the next movie
+  - The useEffect dependency array needs careful attention when chaining async calls (details fetch → AI fetch)
 
 ---
 
