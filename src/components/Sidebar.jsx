@@ -5,7 +5,7 @@ const Sidebar = ({ movies, favorites, watched, onMovieClick, onToggleFavorite, o
   return (
     <aside className="sidebar">
       <div className="sidebar-section">
-        <h2>❤️ Favorites ({favoriteMovies.length})</h2>
+        <h2>🖤 Favorites ({favoriteMovies.length})</h2>
         {favoriteMovies.length === 0 ? (
           <p className="sidebar-empty">No favorites yet. Click the heart on any movie!</p>
         ) : (
