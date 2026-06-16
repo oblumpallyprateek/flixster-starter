@@ -4,7 +4,6 @@ Submitted by: **Prateek Oblumpally**
 
 Estimated time spent: **8** hours spent in total
 
-
 ### Application Features
 
 #### REQUIRED FEATURES
@@ -110,7 +109,7 @@ Estimated time spent: **8** hours spent in total
 
 ### Walkthrough Video
 
-**Walkthrough video:** [Flixster Walkthrough](ADD_LOOM_LINK_HERE)
+**Walkthrough video:** [Flixster Walkthrough](https://www.loom.com/share/bae8a921d641444d9826a173ce663cde)
 
 ### Reflection
 
