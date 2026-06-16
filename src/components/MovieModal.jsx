@@ -110,6 +110,10 @@ const MovieModal = ({ movie, onClose, isOpen }) => {
     ? `${IMAGE_BASE_URL}${movie.poster_path}`
     : '/movie.png';
 
+  const backdropUrl = movieDetails?.backdrop_path
+    ? `https://image.tmdb.org/t/p/w1280${movieDetails.backdrop_path}`
+    : null;
+
   return (
     <div
       className="modal-overlay"
@@ -130,6 +134,15 @@ const MovieModal = ({ movie, onClose, isOpen }) => {
           <div className="modal-loading">Loading details...</div>
         ) : (
           <>
+            {backdropUrl && (
+              <div className="modal-backdrop">
+                <img
+                  src={backdropUrl}
+                  alt={`${movie.title} backdrop`}
+                  className="modal-backdrop-image"
+                />
+              </div>
+            )}
             <div className="modal-header">
               <img
                 src={posterUrl}
@@ -139,6 +152,15 @@ const MovieModal = ({ movie, onClose, isOpen }) => {
               <div className="modal-info">
                 <h2>{movie.title}</h2>
                 <p className="modal-rating">⭐ {movie.vote_average?.toFixed(1)} / 10</p>
+                {movie.release_date && (
+                  <p className="modal-release-date">
+                    Released: {new Date(movie.release_date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </p>
+                )}
                 {movieDetails?.runtime && (
                   <p className="modal-runtime">Runtime: {movieDetails.runtime} min</p>
                 )}

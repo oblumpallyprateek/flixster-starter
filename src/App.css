@@ -461,6 +461,20 @@
   }
 }
 
+.modal-backdrop {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+}
+
+.modal-backdrop-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5);
+}
+
 .modal-close {
   position: absolute;
   top: 1.5rem;

@@ -54,6 +54,7 @@ const SearchBar = ({ onSearch, sortBy, onSortChange, onNowPlaying, viewMode }) =
           onChange={(e) => onSortChange(e.target.value)}
           className="sort-select"
         >
+          <option value="title">Title (A-Z)</option>
           <option value="rating">Rating</option>
           <option value="release_date">Release Date</option>
         </select>

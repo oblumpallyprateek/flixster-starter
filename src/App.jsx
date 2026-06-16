@@ -101,6 +101,8 @@ const App = () => {
         return b.vote_average - a.vote_average;
       } else if (newSortBy === 'release_date') {
         return new Date(b.release_date) - new Date(a.release_date);
+      } else if (newSortBy === 'title') {
+        return a.title.localeCompare(b.title);
       }
       return 0;
     });
