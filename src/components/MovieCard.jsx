@@ -47,7 +47,7 @@ const MovieCard = ({ movie, onClick, isLiked, isWatched, onToggleFavorite, onTog
               aria-label={isWatched ? 'Mark as unwatched' : 'Mark as watched'}
               title={isWatched ? 'Watched' : 'Mark as watched'}
             >
-              {isWatched ? '✓' : '○'}
+              {isWatched ? '✓' : '+'}
             </button>
           </div>
         </div>
