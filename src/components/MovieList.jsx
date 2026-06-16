@@ -49,7 +49,7 @@ const MovieList = ({ movies, onMovieClick, isLoading, favorites, watched, onTogg
                 }}
                 aria-label={favorites.has(featuredMovie.id) ? 'Unlike movie' : 'Like movie'}
               >
-                {favorites.has(featuredMovie.id) ? '❤️' : '🤍'}
+                {favorites.has(featuredMovie.id) ? '🖤' : '🤍'}
               </button>
               <button
                 className={`watched-button ${watched.has(featuredMovie.id) ? 'watched' : ''}`}

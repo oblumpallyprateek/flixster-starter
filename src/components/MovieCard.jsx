@@ -39,7 +39,7 @@ const MovieCard = ({ movie, onClick, isLiked, isWatched, onToggleFavorite, onTog
               onClick={handleLikeClick}
               aria-label={isLiked ? 'Unlike movie' : 'Like movie'}
             >
-              {isLiked ? '❤️' : '🤍'}
+              {isLiked ? '🖤' : '🤍'}
             </button>
             <button
               className={`watched-button ${isWatched ? 'watched' : ''}`}
