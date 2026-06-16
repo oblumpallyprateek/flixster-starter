@@ -184,6 +184,8 @@ const App = () => {
           favorites={favorites}
           watched={watched}
           onMovieClick={handleMovieClick}
+          onToggleFavorite={handleToggleFavorite}
+          onToggleWatched={handleToggleWatched}
         />
       </div>
       <MovieModal

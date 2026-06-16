@@ -636,14 +636,17 @@
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 8px;
-  cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .sidebar-item:hover {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.15);
-  transform: translateX(4px);
+}
+
+.sidebar-item:hover .sidebar-remove {
+  opacity: 1;
 }
 
 .sidebar-poster {
@@ -653,6 +656,13 @@
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sidebar-poster:hover {
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .sidebar-info {
@@ -661,6 +671,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  cursor: pointer;
 }
 
 .sidebar-info h3 {
@@ -680,6 +691,34 @@
   font-size: 0.85rem;
   color: #a0a0a0;
   font-weight: 500;
+}
+
+.sidebar-remove {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(255, 50, 50, 0.2);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 50, 50, 0.3);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+  padding: 0;
+  line-height: 1;
+}
+
+.sidebar-remove:hover {
+  background: rgba(255, 50, 50, 0.4);
+  border-color: rgba(255, 50, 50, 0.6);
+  color: #ffffff;
+  transform: scale(1.1) rotate(90deg);
 }
 
 /* ========================================
