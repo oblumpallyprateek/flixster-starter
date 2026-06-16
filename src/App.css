@@ -90,6 +90,7 @@
 }
 
 .search-button,
+.clear-button,
 .now-playing-button {
   padding: 0.9rem 2rem;
   background: rgba(255, 255, 255, 0.05);
@@ -105,12 +106,23 @@
 }
 
 .search-button:hover,
+.clear-button:hover,
 .now-playing-button:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.3);
   color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.clear-button {
+  background: rgba(255, 100, 100, 0.1);
+  border-color: rgba(255, 100, 100, 0.2);
+}
+
+.clear-button:hover {
+  background: rgba(255, 100, 100, 0.2);
+  border-color: rgba(255, 100, 100, 0.4);
 }
 
 .now-playing-button {

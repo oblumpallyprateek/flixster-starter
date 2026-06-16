@@ -10,6 +10,11 @@ const SearchBar = ({ onSearch, sortBy, onSortChange, onNowPlaying, viewMode }) =
     }
   };
 
+  const handleClear = () => {
+    setInputValue('');
+    onNowPlaying();
+  };
+
   const handleNowPlaying = () => {
     setInputValue('');
     onNowPlaying();
@@ -29,6 +34,11 @@ const SearchBar = ({ onSearch, sortBy, onSortChange, onNowPlaying, viewMode }) =
         <button type="submit" className="search-button">
           Search
         </button>
+        {inputValue && (
+          <button type="button" className="clear-button" onClick={handleClear}>
+            Clear
+          </button>
+        )}
         {viewMode === 'search' && (
           <button type="button" className="now-playing-button" onClick={handleNowPlaying}>
             Now Playing

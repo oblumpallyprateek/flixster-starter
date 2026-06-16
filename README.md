@@ -1,191 +1,139 @@
-# 🎬 Flixster
+📝 `NOTE` Use this template to initialize the contents of a README.md file for your application. As you work on your assignment over the course of the week, update the required or stretch features lists to indicate which features you have completed by changing `[ ]` to `[x]`. (🚫 Remove this paragraph before submitting your assignment.)
 
-A luxury cinema discovery app that helps you explore the latest movies playing in theaters. Built with React and powered by The Movie Database (TMDb) API, featuring AI-powered movie recommendations.
+## Unit Assignment: Flixster
 
-![Flixster Preview](public/movie.png)
+Submitted by: **Prateek Oblumpally**
 
-## ✨ Features
+Estimated time spent: **8** hours spent in total
 
-### Core Features
-- **🎥 Now Playing Movies** - Browse current theatrical releases in an elegant grid layout
-- **🔍 Smart Search** - Find any movie by title with instant results
-- **📄 Load More Pagination** - Seamlessly load additional movies as you browse
-- **🔀 Flexible Sorting** - Sort by rating, release date, or title
-- **📱 Fully Responsive** - Optimized experience across mobile, tablet, and desktop
-- **🎯 Detailed Movie Modal** - View comprehensive movie information including runtime, genres, and overview
-- **🤖 AI-Powered Recommendations** - Get personalized watch recommendations powered by OpenRouter API
 
-### Stretch Features
-- **🖤 Favorites System** - Mark movies you love with a single click
-- **✓ Watched List** - Track movies you've already seen
-- **📊 Smart Sidebar** - Manage your favorites and watched lists with one-click removal
-- **⭐ Featured Hero Card** - First movie displays in a premium large-format layout
+### Application Features
 
-## 🎨 Design Philosophy
+#### REQUIRED FEATURES
 
-Flixster embraces a **luxury minimalist aesthetic** with a sophisticated black, silver, and white color palette. The design draws inspiration from premium streaming services, featuring:
+- [ ] **Display Movies**
+  - [ ] Users can view a list of current movies from The Movie Database API in a grid view.
+    - [ ] Movie tiles should be reasonably sized (at least 6 playlists on your laptop when full screen; large enough that the playlist components detailed in the next feature are legible).
+  - [ ] For each movie displayed, users can see the movie's:
+    - [ ] Title
+    - [ ] Poster image
+    - [ ] Vote average
+  - [ ] Users can load more current movies by clicking a button which adds more movies to the grid without reloading the entire page. 
+- [ ] **Search Functionality**
+  - [ ] Users can use a search bar to search for movies by title.
+  - [ ] The search bar should include:
+    - [ ] Text input field
+    - [ ] Submit/Search button
+    - [ ] Clear button
+  - [ ] Movies with a title containing the search query in the text input field are displayed in a grid view when the user either:
+    - [ ] Presses the Enter key
+    - [ ] Clicks the Submit/Search button
+  - [ ] Users can click the Clear button. When clicked:
+    - [ ] All text in the text input field is deleted
+    - [ ] The most recent search results are cleared from the text input field and the grid view and all current movies are displayed in a grid view
+- [ ] **Design Features**
+  - [ ] Website implements all of the following accessibility features:
+    - [ ] Semantic HTML
+    - [ ] [Color contrast](https://webaim.org/resources/contrastchecker/)
+    - [ ] Alt text for images 
+  - [ ] Website implements responsive web design.
+    - [ ] Uses CSS Flexbox or CSS Grid
+    - [ ] Movie tiles and images shrink/grow in response to window size
+  - [ ] Users can click on a movie tile to view more details about a movie in a pop-up modal.
+    - [ ] The pop-up window is centered in the screen and does not occupy the entire screen.
+    - [ ] The pop-up window has a shadow to show that it is a pop-up and appears floating on the screen.
+    - [ ] The backdrop of the pop-up appears darker or in a different shade than before. including:
+    - [ ] The pop-up displays additional details about the moving including:
+      - [ ] Runtime in minutes
+      - [ ] Backdrop poster
+      - [ ] Release date
+      - [ ] Genres
+      - [ ] An overview
+  - [ ] Users can use a drop-down menu to sort movies.
+    - [ ] Drop-down allows movies to be sorted by:
+      - [ ] Title (alphabetic, A-Z)
+      - [ ] Release date (chronologically, most recent to oldest)
+      - [ ] Vote average (descending, highest to lowest)
+    - [ ] When a sort option is clicked, movies display in a grid according to selected criterion.
+  - [ ] Website displays:
+    - [ ] Header section
+    - [ ] Banner section
+    - [ ] Search bar
+    - [ ] Movie grid
+    - [ ] Footer section
+    - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: To ease the grading process, please use the [color contrast checker](https://webaim.org/resources/contrastchecker/) to demonstrate to the grading team that text and background colors on your website have appropriate contrast. The Contrast Ratio should be above 4.5:1 and should have a green box surrounding it. 
+- [ ] **Planning Documentation**
+  - [ ] Repository includes a `planning.md` file with:
+    - [ ] A **Component Architecture** section listing at least 5 components, each with its responsibility, what it renders, and its props.
+    - [ ] An **API Contracts** section documenting at least 2 TMDb endpoints used, with URL, query parameters, and relevant response fields for each.
+    - [ ] A **State Architecture** section listing state variables with name, type, initial value, owner component, and what user action triggers an update.
+    - [ ] A **Data Flow** section (paragraph or diagram) explaining how data flows from the TMDb API response through the component hierarchy to the `MovieCard`, including any transformations.
+- [ ] **AI Watch Recommendation**
+  - [ ] When a movie's detail modal is opened, an AI-generated watch recommendation is displayed alongside the movie details.
+  - [ ] A loading state is shown while the AI response is being generated, and a graceful fallback message is shown if the AI call fails.
+  - [ ] `planning.md` includes an **AI Feature Spec** documenting role, task, inputs, output format, constraints, and failure behavior for the AI call.
+  - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: To ease the grading process, open your browser's DevTools **Network** tab, trigger the AI recommendation (open a movie modal), and show the outbound request going **directly to an AI API URL** (e.g., `openrouter.ai`) — not to a backend server URL. Graders need to see this call in the Network tab to award full credit.
 
-- **Typography**: Playfair Display (serif) for elegant titles, Inter (sans-serif) for clean body text
-- **Glass Morphism**: Backdrop blur effects and translucent elements throughout
-- **Smooth Animations**: Cubic-bezier easing for premium feel
-- **Attention to Detail**: Hover effects, micro-interactions, and refined spacing
+#### STRETCH FEATURES
 
-## 🚀 Tech Stack
+- [ ] **Deployment**
+  - [ ] Website is deployed via Render.
+  - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: For ease of grading, please use the deployed version of your website when creating your walkthrough. 
+- [ ] **Embedded Movie Trailers**
+  - [ ] Within the pop-up modal displaying a movie's details, the movie trailer is viewable.
+    - [ ] When the trailer is clicked, users can play the movie trailer.
+- [ ] **Favorite Button**
+  - [ ] For each movie displayed, users can favorite the movie.
+  - [ ] There should be visual element (such as a heart icon) on each movie's tile to show whether or not the movie has been favorited.
+  - [ ] If the movie is not favorited:
+    - [ ] Clicking on the visual element should mark the movie as favorited
+    - [ ] There should be visual feedback (such as the heart turning a different color) to show that the movie has been favorited by the user.
+  - [ ] If the movie is already favorited:
+    - [ ] Clicking on the visual element should mark the movie as *not* favorited.
+    - [ ] There should be visual feedback (such as the heart turning a different color) to show that the movie has been unfavorited. 
+- [ ] **Watched Checkbox**
+  - [ ] For each movie displayed, users can mark the movie as watched.
+  - [ ] There should be visual element (such as an eye icon) on each movie's tile to show whether or not the movie has been watched.
+  - [ ] If the movie has not been watched:
+    - [ ] Clicking on the visual element should mark the movie as watched
+    - [ ] There should be visual feedback (such as the eye turning a different color) to show that the movie has been watched by the user.
+  - [ ] If the movie is already watched:
+    - [ ] Clicking on the visual element should mark the movie as *not* watched.
+    - [ ] There should be visual feedback (such as the eye turning a different color) to show that the movie has not been watched.
+- [ ] **Sidebar**
+  - [ ] The website includes a side navigation bar.
+  - [ ] The sidebar has three pages:
+    - [ ] Home
+    - [ ] Favorites
+    - [ ] Watched
+  - [ ] The Home page displays all current movies in a grid view, the search bar, and the sort movies drop-down.
+  - [ ] The Favorites page displays all favorited movies in a grid view.
+  - [ ] The Watched page displays all watched movies in a grid view.
 
-- **Frontend**: React 18 with Vite
-- **Styling**: Custom CSS with CSS Grid and Flexbox
-- **APIs**: 
-  - The Movie Database (TMDb) API
-  - OpenRouter API (for AI recommendations)
-- **Fonts**: Google Fonts (Playfair Display, Inter)
+### Walkthrough Video
 
-## 📦 Installation
+`TODO://` Paste the **shareable link** to your animated app walkthrough below (replace `ADD_LOOM_LINK_HERE`). GitHub markdown won't render an embedded Loom player, so a plain link is what graders will use. Make sure the link is public and playable before submitting. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website. (🚫 Remove this paragraph after adding your walkthrough link.)
 
-### Prerequisites
-- Node.js (v14 or higher)
-- npm or yarn
-- TMDb API Key ([Get one here](https://www.themoviedb.org/settings/api))
-- OpenRouter API Key ([Get one here](https://openrouter.ai/keys))
+**Walkthrough video:** [Flixster Walkthrough](ADD_LOOM_LINK_HERE)
 
-### Setup
+### Reflection
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/flixster-starter.git
-   cd flixster-starter
-   ```
+* Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+Add your response here
 
-3. **Configure environment variables**
-   
-   Create a `.env` file in the project root:
-   ```env
-   VITE_API_KEY=your_tmdb_api_key_here
-   VITE_OPENROUTER_API_KEY=your_openrouter_api_key_here
-   ```
+* If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
+  
+Add your response here
 
-4. **Start the development server**
-   ```bash
-   npm run dev
-   ```
+* Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-5. **Open your browser**
-   
-   Navigate to `http://localhost:5173`
+Add your response here
 
-## 🎯 Usage
+### Open-source libraries used
 
-### Browsing Movies
-- The app loads with the latest "Now Playing" movies from TMDb
-- The first movie appears as a featured hero card with a larger layout
-- Scroll down to see additional movies in a responsive grid
+- Add any links to open-source libraries used in your project.
 
-### Searching
-- Use the search bar at the top to find movies by title
-- Click "Now Playing" to return to the main browse view
+### Shout out
 
-### Managing Lists
-- Click the **white heart (🤍)** on any movie to add it to favorites (turns **black 🖤**)
-- Click the **plus (+)** on any movie to mark it as watched (turns **checkmark ✓**)
-- View your lists in the **sidebar** on the right
-- Hover over any sidebar item to reveal a **remove button (✕)**
-
-### Viewing Details
-- Click any movie card or sidebar item to open the detail modal
-- View runtime, genres, rating, and a full overview
-- Get an **AI-generated watch recommendation** based on the movie's details
-
-### Sorting
-- Use the "Sort by" dropdown to organize movies by:
-  - **Rating** (highest first)
-  - **Release Date** (newest first)
-
-## 📁 Project Structure
-
-```
-flixster-starter/
-├── src/
-│   ├── components/
-│   │   ├── Header.jsx          # App header with branding
-│   │   ├── SearchBar.jsx       # Search input and sort controls
-│   │   ├── MovieList.jsx       # Featured card + movie grid
-│   │   ├── MovieCard.jsx       # Individual movie card
-│   │   ├── MovieModal.jsx      # Detail modal with AI recommendations
-│   │   ├── Sidebar.jsx         # Favorites and watched lists
-│   │   └── Footer.jsx          # App footer
-│   ├── App.jsx                 # Root component with state management
-│   ├── App.css                 # Global styles and component styling
-│   ├── index.css               # Base styles and typography
-│   └── main.jsx                # React entry point
-├── planning.md                 # Project specification and architecture
-├── .env                        # Environment variables (not committed)
-├── .gitignore                  # Git ignore rules
-├── package.json                # Dependencies and scripts
-└── README.md                   # This file
-```
-
-## 🧠 Key Decisions
-
-### State Management
-- **Centralized state** in `App.jsx` for favorites and watched lists
-- State lifted from `MovieCard` to enable sidebar functionality
-- Uses `Set` data structure for O(1) lookup performance
-
-### AI Integration
-- **OpenRouter API** with `openrouter/free` model for cost-effective recommendations
-- Prompt engineered to avoid spoilers and generic responses
-- Graceful fallback for API failures
-
-### Design Choices
-- **Featured hero card** for visual hierarchy and premium feel
-- **Monochrome hearts** (🤍/🖤) instead of red to maintain luxury aesthetic
-- **Sidebar remove buttons** appear on hover for clean UI
-- **Glass morphism** for modern, sophisticated appearance
-
-## 🎓 What I Learned
-
-- **Prompt Engineering**: Refined AI prompts to get consistent, high-quality responses
-- **State Architecture**: Learned when to lift state vs. keep it local
-- **API Integration**: Handled multiple endpoints (Now Playing, Search, Details, AI)
-- **Responsive Design**: Built mobile-first with progressive enhancement
-- **Component Design**: Created reusable, prop-driven components
-- **User Experience**: Balanced aesthetics with usability (hover states, loading indicators, error handling)
-
-## 🔮 Future Enhancements
-
-- **Deployment** - Deploy to Render for public access
-- **YouTube Trailers** - Embed official trailers in the movie modal
-- **LocalStorage Persistence** - Save favorites/watched across sessions
-- **User Authentication** - Personal accounts with cloud-synced lists
-- **Advanced Filters** - Filter by genre, year, rating range
-- **Dark/Light Mode** - Theme toggle (currently dark-only)
-- **Watchlist** - Separate list for "want to watch" movies
-
-## 📝 Planning & Documentation
-
-This project was built following a specification-first approach. See [`planning.md`](planning.md) for:
-- Component architecture and hierarchy
-- API contracts and endpoints
-- State architecture and data flow
-- AI feature specification and decisions log
-
-## 🙏 Acknowledgments
-
-- **The Movie Database (TMDb)** - Movie data and imagery
-- **OpenRouter** - AI model access
-- **CodePath** - Project requirements and guidance
-- **Google Fonts** - Playfair Display and Inter typefaces
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-**Built with 🖤 by Prateek Oblumpally**
-
-*Part of CodePath's Summer Internship for Tech Excellence (SITE) program*
+Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
