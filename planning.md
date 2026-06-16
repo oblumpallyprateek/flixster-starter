@@ -7,8 +7,12 @@
 App
 ├── Header
 ├── SearchBar
-├── MovieList
-│   └── MovieCard (multiple)
+├── main-content
+│   ├── content-area
+│   │   ├── MovieList
+│   │   │   └── MovieCard (multiple)
+│   │   └── Load More button
+│   └── Sidebar
 ├── MovieModal
 └── Footer
 ```
@@ -28,6 +32,8 @@ App
   - `error` (string | null): Error messages from API
   - `sortBy` (string): Current sort option ('rating' | 'release_date')
   - `viewMode` (string): 'now-playing' | 'search'
+  - `favorites` (Set): Set of movie IDs marked as favorites
+  - `watched` (Set): Set of movie IDs marked as watched
 
 #### **Header**
 - **Responsibility**: Display app branding and navigation
@@ -56,12 +62,15 @@ App
 
 #### **MovieCard**
 - **Responsibility**: Display individual movie information in card format
-- **Renders**: Movie poster, title, rating, like button
+- **Renders**: Movie poster, title, rating, like button, watched button
 - **Props**:
   - `movie` (object): Movie data (id, title, poster_path, vote_average, release_date)
   - `onClick` (function): Callback when card is clicked
-- **State**:
-  - `isLiked` (boolean): Like state for this movie
+  - `isLiked` (boolean): Whether this movie is favorited
+  - `isWatched` (boolean): Whether this movie is watched
+  - `onToggleFavorite` (function): Callback to toggle favorite status
+  - `onToggleWatched` (function): Callback to toggle watched status
+- **State**: None (presentational component)
 
 #### **MovieModal**
 - **Responsibility**: Display detailed movie information in a modal overlay
@@ -80,6 +89,16 @@ App
 - **Renders**: Footer content (copyright, TMDb attribution)
 - **Props**: None
 - **State**: None
+
+#### **Sidebar**
+- **Responsibility**: Display lists of favorited and watched movies
+- **Renders**: Two sections - Favorites list and Watched list, each with clickable movie items
+- **Props**:
+  - `movies` (array): All current movies (to filter for favorites/watched)
+  - `favorites` (Set): Set of favorited movie IDs
+  - `watched` (Set): Set of watched movie IDs
+  - `onMovieClick` (function): Callback when a sidebar movie item is clicked
+- **State**: None (presentational component)
 
 ---
 
@@ -156,19 +175,19 @@ App
 | `error` | `string \| null` | `null` | App | API errors occur |
 | `sortBy` | `string` | `'rating'` | App | User changes sort dropdown |
 | `viewMode` | `string` | `'now-playing'` | App | User searches or returns to Now Playing |
+| `favorites` | `Set<number>` | `new Set()` | App | User clicks heart icon on MovieCard |
+| `watched` | `Set<number>` | `new Set()` | App | User clicks watched button on MovieCard |
 
 ### Local State
 
 #### SearchBar Component
 - `inputValue` (string): Controlled input value, resets after search submission
 
-#### MovieCard Component
-- `isLiked` (boolean): Per-card like state, initialized to `false`
-
 #### MovieModal Component
 - `movieDetails` (object | null): Detailed movie data from `/movie/{id}` endpoint
 - `isLoading` (boolean): Loading state while fetching details
 - `aiInsight` (string | null): AI-generated recommendation text
+- `loadingInsight` (boolean): Loading state while AI response is being generated
 
 ---
 
@@ -332,7 +351,9 @@ When the modal opens and movie details have been successfully fetched (in a `use
 4. ✅ Build MovieModal with detail fetch
 5. ✅ Implement sort controls
 6. ✅ Make responsive for all devices
-7. Add like/unlike functionality with localStorage
-8. Integrate pagination
-9. Implement AI feature
-10. Testing and deployment
+7. ✅ Add like/unlike functionality (favorites)
+8. ✅ Integrate pagination
+9. ✅ Implement AI feature
+10. ✅ **STRETCH:** Add watched list functionality
+11. ✅ **STRETCH:** Create Sidebar component to display favorites and watched movies
+12. Testing and deployment

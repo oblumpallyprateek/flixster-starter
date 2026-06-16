@@ -5,6 +5,7 @@ import SearchBar from './components/SearchBar';
 import MovieList from './components/MovieList';
 import MovieModal from './components/MovieModal';
 import Footer from './components/Footer';
+import Sidebar from './components/Sidebar';
 
 const App = () => {
   const [movies, setMovies] = useState([]);
@@ -15,6 +16,8 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
+  const [favorites, setFavorites] = useState(new Set());
+  const [watched, setWatched] = useState(new Set());
 
   useEffect(() => {
     fetchNowPlayingMovies();
@@ -112,6 +115,30 @@ const App = () => {
     setSelectedMovie(null);
   };
 
+  const handleToggleFavorite = (movieId) => {
+    setFavorites(prev => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(movieId)) {
+        newFavorites.delete(movieId);
+      } else {
+        newFavorites.add(movieId);
+      }
+      return newFavorites;
+    });
+  };
+
+  const handleToggleWatched = (movieId) => {
+    setWatched(prev => {
+      const newWatched = new Set(prev);
+      if (newWatched.has(movieId)) {
+        newWatched.delete(movieId);
+      } else {
+        newWatched.add(movieId);
+      }
+      return newWatched;
+    });
+  };
+
   const handleLoadMore = () => {
     const nextPage = currentPage + 1;
     if (viewMode === 'search') {
@@ -133,18 +160,32 @@ const App = () => {
         onNowPlaying={fetchNowPlayingMovies}
         viewMode={viewMode}
       />
-      <MovieList
-        movies={movies}
-        onMovieClick={handleMovieClick}
-        isLoading={isLoading}
-      />
-      {showLoadMore && (
-        <div className="load-more-container">
-          <button className="load-more-button" onClick={handleLoadMore}>
-            Load More
-          </button>
+      <div className="main-content">
+        <div className="content-area">
+          <MovieList
+            movies={movies}
+            onMovieClick={handleMovieClick}
+            isLoading={isLoading}
+            favorites={favorites}
+            watched={watched}
+            onToggleFavorite={handleToggleFavorite}
+            onToggleWatched={handleToggleWatched}
+          />
+          {showLoadMore && (
+            <div className="load-more-container">
+              <button className="load-more-button" onClick={handleLoadMore}>
+                Load More
+              </button>
+            </div>
+          )}
         </div>
-      )}
+        <Sidebar
+          movies={movies}
+          favorites={favorites}
+          watched={watched}
+          onMovieClick={handleMovieClick}
+        />
+      </div>
       <MovieModal
         movie={selectedMovie}
         onClose={handleCloseModal}
