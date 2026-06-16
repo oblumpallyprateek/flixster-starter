@@ -116,15 +116,15 @@ Estimated time spent: **8** hours spent in total
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Add your response here
+The Weather Report labs prepared me well for component architecture, API integration, and state management, which formed the foundation of this project. However, I felt unprepared for the AI feature integration—prompt engineering and handling asynchronous API calls within React components was new territory. The labs also didn't cover state lifting at the scale needed for the sidebar feature, so figuring out how to manage favorites and watched lists across multiple components required additional research and refactoring.
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
-Add your response here
+If I had more time, I would have implemented localStorage to persist favorites and watched lists across browser sessions, as currently they reset on page reload. I would have also added the embedded YouTube trailers stretch feature and deployed the app to Render so it could be shared publicly. Additionally, I would have refined the sort functionality to work across all paginated results rather than just the currently loaded movies, which would require a different approach to how I fetch and manage movie data.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+The luxury aesthetic and featured hero movie layout received positive feedback and really made the app stand out visually from other submissions. The sidebar remove functionality worked seamlessly during the demo, which showcased the thoughtful UX design beyond the basic requirements. One thing I'd like to try next time is adding micro-interactions like the subtle animations I saw in a peer's project—things like loading skeletons for movie cards and staggered fade-ins for the grid would add even more polish to the user experience.
 
 ### Open-source libraries used
 
@@ -133,3 +133,5 @@ Add your response here
 ### Shout out
 
 Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+
+Shout out to Dylan for helping me with the design!
